@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="dashboard-wrapper">
+
+    <nav class="dashboard-nav">
+        <div class="nav-brand">
+            <div class="brand-icon small">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+            <span>SecureAuth</span>
+        </div>
+        <div class="nav-user">
+            <span>👋 {{ username }}</span>
+            <a href="{{ url_for('logout') }}" class="btn-logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="dashboard-content">
+        <div class="welcome-section">
+            <h1>Welcome, <span class="teal">{{ username }}</span>!</h1>
+            <p>You are securely logged in. Here's an overview of the security features protecting your account.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>SQL Injection</h3>
+                <p>All database queries use parameterized statements. User input never touches raw SQL.</p>
+                <span class="badge active">Active</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Password Hashing</h3>
+                <p>Passwords are hashed using Bcrypt before storage. Plain text is never saved.</p>
+                <span class="badge active">Active</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🪙</div>
+                <h3>CSRF Protection</h3>
+                <p>Every form submission includes a unique CSRF token to prevent forged requests.</p>
+                <span class="badge active">Active</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚫</div>
+                <h3>XSS Protection</h3>
+                <p>Content Security Policy headers and output escaping prevent script injection.</p>
+                <span class="badge active">Active</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Brute Force Guard</h3>
+                <p>Accounts are automatically locked after 5 consecutive failed login attempts.</p>
+                <span class="badge active">Active</span>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3>Input Validation</h3>
+                <p>All form inputs are validated server-side before processing or storing data.</p>
+                <span class="badge active">Active</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
