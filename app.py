@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 
 # Secret key
-app.config['SECRET_KEY'] = 'your-secret-key-here'
+app.config['SECRET_KEY'] = 'ALAN@1510'
 
 # Database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
