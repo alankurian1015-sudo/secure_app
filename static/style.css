@@ -387,6 +387,269 @@ body {
     color: #1aab90;
 }
 
+.badge.active {
+    background: #e6f9f5;
+    color: #1aab90;
+}
+
+.badge.inactive {
+    background: #fdecea;
+    color: #d63c3c;
+}
+
+/* ── 2FA Setup Styles ── */
+.setup-2fa-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.qr-code-wrapper {
+    background: #fff;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eaeaea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qr-code-wrapper svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.manual-key-wrapper {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.manual-key-label {
+    font-size: 11.5px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.manual-key {
+    background: #f4f6f8;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 13px;
+    color: #333;
+    letter-spacing: 0.5px;
+    border: 1px dashed #ccc;
+    user-select: all;
+}
+
+/* ── Security Management Card ── */
+.security-mgmt-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    border-left: 5px solid #1aab90;
+}
+
+.mgmt-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.mgmt-icon {
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.mgmt-text h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+.mgmt-text p {
+    font-size: 12.5px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.mgmt-action {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    min-width: 140px;
+}
+
+.btn-primary-inline {
+    display: inline-block;
+    padding: 8px 18px;
+    background: linear-gradient(135deg, #2ec4a9, #1aab90);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;
+    text-align: center;
+    transition: opacity 0.2s;
+}
+
+.btn-primary-inline:hover {
+    opacity: 0.9;
+}
+
+.btn-danger-outline {
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1.5px solid #d63c3c;
+    background: transparent;
+    color: #d63c3c;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-danger-outline:hover {
+    background: #d63c3c;
+    color: white;
+}
+
+/* ── Audit Logs Card ── */
+.audit-card-wrapper {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    margin-top: 28px;
+}
+
+.audit-header {
+    margin-bottom: 20px;
+}
+
+.audit-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+.audit-header p {
+    font-size: 12.5px;
+    color: #777;
+}
+
+.audit-table-container {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.audit-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    text-align: left;
+}
+
+.audit-table th {
+    background: #f4f6f8;
+    color: #555;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-bottom: 2px solid #eaeaea;
+}
+
+.audit-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #f0f2f5;
+    color: #444;
+}
+
+.audit-table tr:last-child td {
+    border-bottom: none;
+}
+
+.audit-table tr:hover td {
+    background: #fafbfc;
+}
+
+.audit-table code {
+    background: #f1f3f5;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 12px;
+}
+
+.ua-cell {
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #777;
+}
+
+.no-logs {
+    text-align: center;
+    color: #999;
+    padding: 30px !important;
+}
+
+/* ── Security Event Badges ── */
+.event-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.event-badge.login_success,
+.event-badge.login_success_2fa {
+    background: #e6f9f5;
+    color: #1aab90;
+}
+
+.event-badge.login_failed,
+.event-badge.2fa_code_failed,
+.event-badge.registration_attempt_failed {
+    background: #fdecea;
+    color: #d63c3c;
+}
+
+.event-badge.user_registration,
+.event-badge.2fa_enabled {
+    background: #eef3ff;
+    color: #3b82f6;
+}
+
+.event-badge.logout,
+.event-badge.2fa_disabled {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.event-badge.account_lockout,
+.event-badge.session_anomaly_hijack {
+    background: #fef3c7;
+    color: #d97706;
+}
+
 /* ── Responsive ── */
 @media (max-width: 680px) {
     .auth-card {
@@ -413,5 +676,16 @@ body {
 
     .dashboard-nav {
         padding: 14px 20px;
+    }
+
+    .security-mgmt-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .mgmt-action {
+        align-items: flex-start;
+        width: 100%;
     }
 }

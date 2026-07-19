@@ -20,22 +20,54 @@
     </nav>
 
     <div class="dashboard-content">
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert {{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
         <div class="welcome-section">
             <h1>Welcome, <span class="teal">{{ username }}</span>!</h1>
             <p>You are securely logged in. Here's an overview of the security features protecting your account.</p>
         </div>
 
+        <!-- Security Management Card -->
+        <div class="security-mgmt-card">
+            <div class="mgmt-header">
+                <div class="mgmt-icon">🛡️</div>
+                <div class="mgmt-text">
+                    <h3>Two-Factor Authentication (2FA)</h3>
+                    <p>Add an extra layer of protection by requiring a temporary code from your mobile authenticator app when signing in.</p>
+                </div>
+            </div>
+            <div class="mgmt-action">
+                {% if current_user.is_totp_enabled %}
+                <span class="badge active">ENABLED</span>
+                <form method="POST" action="{{ url_for('disable_2fa') }}" style="display:inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn-danger-outline">Disable 2FA</button>
+                </form>
+                {% else %}
+                <span class="badge inactive">DISABLED</span>
+                <a href="{{ url_for('setup_2fa') }}" class="btn-primary-inline">Set Up 2FA</a>
+                {% endif %}
+            </div>
+        </div>
+
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">🛡️</div>
-                <h3>SQL Injection</h3>
+                <h3>SQL Injection Protection</h3>
                 <p>All database queries use parameterized statements. User input never touches raw SQL.</p>
                 <span class="badge active">Active</span>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🔐</div>
                 <h3>Password Hashing</h3>
-                <p>Passwords are hashed using Bcrypt before storage. Plain text is never saved.</p>
+                <p>Passwords are hashed using Bcrypt with complexity validation. Plain text is never saved.</p>
                 <span class="badge active">Active</span>
             </div>
             <div class="feature-card">
@@ -57,12 +89,53 @@
                 <span class="badge active">Active</span>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">✅</div>
-                <h3>Input Validation</h3>
-                <p>All form inputs are validated server-side before processing or storing data.</p>
+                <div class="feature-icon">⛓️</div>
+                <h3>Session Pinning</h3>
+                <p>Sessions are tied directly to IP and User Agent to block session hijacking.</p>
                 <span class="badge active">Active</span>
             </div>
         </div>
+
+        <!-- Audit Trail Card -->
+        <div class="audit-card-wrapper">
+            <div class="audit-header">
+                <h3>Account Activity & Audit Logs</h3>
+                <p>Verify your recent login sessions and security configuration updates.</p>
+            </div>
+            <div class="audit-table-container">
+                <table class="audit-table">
+                    <thead>
+                        <tr>
+                            <th>Security Event</th>
+                            <th>Date & Time (UTC)</th>
+                            <th>IP Address</th>
+                            <th>Device / User Agent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if audit_logs %}
+                        {% for log in audit_logs %}
+                        <tr>
+                            <td>
+                                <span class="event-badge {{ log.event_type }}">
+                                    {{ log.event_type.replace('_', ' ').upper() }}
+                                </span>
+                            </td>
+                            <td>{{ log.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td><code>{{ log.ip_address }}</code></td>
+                            <td class="ua-cell" title="{{ log.user_agent }}">{{ log.user_agent }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="4" class="no-logs">No security events recorded yet.</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 </div>
 {% endblock %}

@@ -24,6 +24,11 @@ db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
+# Initialize CSRF Protection
+from flask_wtf.csrf import CSRFProtect
+csrf = CSRFProtect(app)
+
+
 # Security headers on every response
 @app.after_request
 def set_security_headers(response):
